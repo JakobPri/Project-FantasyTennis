@@ -1,0 +1,102 @@
+
+#DrawOverall {
+    display: flex;
+    flex-direction: row
+
+
+}
+
+#theDrawR1 {
+    display: flex;
+    width: 100px;
+    height: 1200px;
+    flex-direction: column;
+}
+#theDrawR2 {
+    display: flex;
+    width: 100px;
+    height: 1200px;
+    flex-direction: column;
+    margin-left: 100px;
+}
+#theDrawR3 {
+    display: flex;
+    width: 100px;
+    height: 1200px;
+    flex-direction: column;
+    margin-left: 100px;
+}
+#theDrawR4 {
+    display: flex;
+    width: 100px;
+    height: 1200px;
+    flex-direction: column;
+    margin-left: 100px;
+}
+
+
+  .bottomOfTwo {
+    display: flex;
+    flex-direction: column;
+    height: 30px;
+    width: 100px;
+    margin-bottom: 50px;
+
+  }
+  .topOfTwo {
+    display: flex;
+    flex-direction: column;
+    height:30px;
+    width: 100px;
+    margin-top: 50px;
+
+  }
+
+  
+
+  .bottomOfTwo2 {
+    display: flex;
+    flex-direction: column;
+    height: 30px;
+    width: 100px;
+    margin-bottom: 130px;
+    margin-left: 10px;
+    
+  }
+  .topOfTwo2 {
+    display: flex;
+    flex-direction: column;
+    height:30px;
+    width: 100px;
+    margin-top: 130px;
+    margin-left: 10px
+
+  }
+  .bottomOfTwo3 {
+    display: flex;
+    flex-direction: column;
+    height: 30px;
+    width: 100px;
+    margin-bottom: 285px;
+    margin-left: 10px;
+    
+  }
+  .topOfTwo3 {
+    display: flex;
+    flex-direction: column;
+    height:30px;
+    width: 100px;
+    margin-top: 285px;
+    margin-left: 10px
+
+  }
+
+  .topOfTwo4 {
+    display: flex;
+    flex-direction: column;
+    height:30px;
+    width: 100px;
+    margin-top: 300px;
+    margin-left: 10px
+
+  }
