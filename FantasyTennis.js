@@ -21,7 +21,12 @@ class FantasyTennis {
     }
 
 
-
+    start() {
+        this.setUpTournament()
+        this.setUpGraphicDraw()
+        this.defineStructure()
+        this.clicker()
+    }
     setUpTournament() {
 
 
@@ -123,8 +128,8 @@ class FantasyTennis {
         }
         this.guessedResultDraw.push(this.Winner[0].innerHTML)
     }
-        compareResults() {
-            this.pointCounter = 0
+    compareResults() {
+        this.pointCounter = 0
         for (let l = 0; l < 15; l++) {
             if (this.guessedResultDraw[l] == this.realResultDraw[l] && l < 8) {
                 this.pointCounter = this.pointCounter + 0
@@ -142,4 +147,37 @@ class FantasyTennis {
         console.log(this.guessedResultDraw)
         console.log(this.pointCounter)
     }
+
+    clicker() {
+    this.Quarterfinal.forEach((element, index) => {
+
+        element.onclick = () => {
+            this.Semifinal[Math.floor(index / 2)].innerHTML = element.innerHTML;
+            this.Semifinal[Math.floor(index / 2)] = element;
+            console.log(this.Semifinal)
+            this.pushResults()
+            this.compareResults()
+        }
+    })
+    
+    this.Semifinal.forEach((element, index) => {
+    
+        element.onclick = () => {
+            this.Final[Math.floor(index / 2)].innerHTML = element.innerHTML;
+            console.log(Math.floor(index / 2))
+            this.pushResults()
+            this.compareResults()
+        }
+    })
+    
+    this.Final.forEach((element, index) => {
+    
+        element.onclick = () => {
+            this.Winner[Math.floor(index / 2)].innerHTML = element.innerHTML;
+            console.log(Math.floor(index / 2))
+            this.pushResults()
+            this.compareResults()
+        }
+    })
+}
 }
