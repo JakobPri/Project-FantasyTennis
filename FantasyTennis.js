@@ -3,6 +3,8 @@ class FantasyTennis {
         this.tournamentName = document.getElementById("chooseTournament").value;
         this.drawSize = 0;
         this.actualPlayer = ["Federer", "Djokovic", "Nadal", "Thiem", "Zverev", "Nishikori", "Cilic", "Dimitrov"];
+        this.realResultDraw = ["Federer", "Djokovic", "Nadal", "Thiem", "Zverev", "Nishikori", "Cilic", "Dimitrov", "Federer", "Thiem", "Zverev", "Cilic", "Federer", "Cilic", "Federer"] // Quarter, Semi, Final, Winner
+        this.guessedResultDraw = [];
         this.topBox = document.getElementsByClassName("topOfTwo");
         this.bottomBox = document.getElementsByClassName("bottomOfTwo");
         this.topBox2 = document.getElementsByClassName("topOfTwo2");
@@ -14,6 +16,8 @@ class FantasyTennis {
         this.Semifinal = [];
         this.Final = [];
         this.Winner = [];
+        this.pointCounter = 0;
+        this.totalPoints = document.getElementById("totalPoint");
     }
 
 
@@ -103,6 +107,39 @@ class FantasyTennis {
         this.Final.push(this.bottomBox3[0])
 
         this.Winner.push(this.theDrawR4[0])
-        
+
     }
+
+    pushResults() {
+        this.guessedResultDraw = []
+        for (let i = 0; i < 8; i++) {
+            this.guessedResultDraw.push(this.Quarterfinal[i].innerHTML)
+        }
+        for (let j = 0; j < 4; j++) {
+            this.guessedResultDraw.push(this.Semifinal[j].innerHTML)
+        }
+        for (let k = 0; k < 2; k++) {
+            this.guessedResultDraw.push(this.Final[k].innerHTML)
+        }
+        this.guessedResultDraw.push(this.Winner[0].innerHTML)
     }
+        compareResults() {
+            this.pointCounter = 0
+        for (let l = 0; l < 15; l++) {
+            if (this.guessedResultDraw[l] == this.realResultDraw[l] && l < 8) {
+                this.pointCounter = this.pointCounter + 0
+            } else if (this.guessedResultDraw[l] == this.realResultDraw[l] && l < 12) {
+                this.pointCounter = this.pointCounter + 1
+            } else if (this.guessedResultDraw[l] == this.realResultDraw[l] && l < 14) {
+                this.pointCounter = this.pointCounter + 2
+            } else if (this.guessedResultDraw[l] == this.realResultDraw[l] && l < 15) {
+                this.pointCounter = this.pointCounter + 4
+            }
+            this.totalPoints.innerHTML = this.pointCounter
+
+        }
+        console.log(this.realResultDraw)
+        console.log(this.guessedResultDraw)
+        console.log(this.pointCounter)
+    }
+}
