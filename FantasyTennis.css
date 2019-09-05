@@ -1,3 +1,36 @@
+
+
+
+button {
+  width: 140px;
+  height: 25px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  text-align: center;
+  vertical-align: middle;
+  }
+
+
+
+button:hover {
+  background-color: #2EE59D;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+}
+
 table {
   font-family: Verdana;
   font-size: 16px;
@@ -38,73 +71,53 @@ th {
     height: 1200px;
     margin-left: 100px;
     flex-direction: column;
+    
 }
 
-  .bottomOfTwo {
+  .bottomOfTwo, .bottomOfTwo2,.bottomOfTwo3,.bottomOfTwo4 {
     display: flex;
     flex-direction: column;
-    height: 30px;
-    width: 100px;
     margin-bottom: 50px;
+    justify-content: center;
+    align-items: center;
+
+
 
   }
-  .topOfTwo {
+  .topOfTwo, .topOfTwo2, .topOfTwo3, .topOfTwo4 {
     display: flex;
     flex-direction: column;
-    height:30px;
-    width: 100px;
     margin-top: 50px;
+    justify-content: center;
+    align-items: center;
+
+    
 
   }
-
-  
-
   .bottomOfTwo2 {
-    display: flex;
-    flex-direction: column;
-    height: 30px;
-    width: 100px;
     margin-bottom: 130px;
-    margin-left: 10px;
-    
   }
+
   .topOfTwo2 {
-    display: flex;
-    flex-direction: column;
-    height:30px;
-    width: 100px;
     margin-top: 130px;
-    margin-left: 10px
-
   }
+
   .bottomOfTwo3 {
-    display: flex;
-    flex-direction: column;
-    height: 30px;
-    width: 100px;
     margin-bottom: 285px;
-    margin-left: 10px;
-    
   }
+  
   .topOfTwo3 {
-    display: flex;
-    flex-direction: column;
-    height:30px;
-    width: 100px;
     margin-top: 285px;
-    margin-left: 10px
-
   }
 
   .theDrawR4 {
     display: flex;
     flex-direction: column;
-    height:30px;
-    width: 100px;
     margin-top: 300px;
     margin-left: 10px
 
   }
+  
 
   #Scoreboard {
     display: flex;

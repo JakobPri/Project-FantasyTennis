@@ -21,12 +21,7 @@ class FantasyTennis {
         this.submitButton = document.getElementById("submitButton");
     }
 
-
-
     setUpTournament() {
-
-
-
         tournament.forEach((item) => {
             var tournamentOption = document.createElement("option");
             tournamentOption.innerText = item[1];
@@ -42,7 +37,6 @@ class FantasyTennis {
         }
     }
 
-
     setUpGraphicDraw() {
         // setup1R() {}
         // setup2R() {}
@@ -51,11 +45,9 @@ class FantasyTennis {
         // setupQF() {}
         // setupSF() {}
         // setupFF() {}
-
-
-
         for (let i = 1; i <= this.drawSize / 2; i++) {
             let box = document.createElement("div");
+            box.className = "divAroundButtons"
             let playerBoxes = document.createElement("button");
             playerBoxes.innerHTML = this.actualPlayer[2 * i - 2];
             playerBoxes.className = "topOfTwo"
@@ -69,6 +61,7 @@ class FantasyTennis {
 
         for (let j = 1; j <= this.drawSize / 4; j++) {
             let box = document.createElement("div");
+            box.className = "divAroundButtons"
             let playerBoxes2 = document.createElement("button");
             playerBoxes2.innerHTML = ""
             playerBoxes2.className = "topOfTwo2"
@@ -81,6 +74,7 @@ class FantasyTennis {
         }
         for (let k = 1; k <= this.drawSize / 8; k++) {
             let box = document.createElement("div");
+            box.className = "divAroundButtons"
             let playerBoxes4 = document.createElement("button");
             playerBoxes4.innerHTML = ""
             playerBoxes4.className = "topOfTwo3"
@@ -99,8 +93,8 @@ class FantasyTennis {
             box.appendChild(playerBoxes6);
             document.getElementById("theDrawR4").appendChild(box);
         }
-
     }
+    
     defineBackend() {
         this.Quarterfinal.push(this.topBox[0])
         this.Quarterfinal.push(this.bottomBox[0])
@@ -120,11 +114,9 @@ class FantasyTennis {
         this.Final.push(this.bottomBox3[0])
 
         this.Winner.push(this.theDrawR4[0])
-
     }
 
     pushResults() {
-
         this.guessedResultDraw = []
         for (let i = 0; i < 8; i++) {
             this.guessedResultDraw.push(this.Quarterfinal[i].innerHTML)
@@ -136,8 +128,8 @@ class FantasyTennis {
             this.guessedResultDraw.push(this.Final[k].innerHTML)
         }
         this.guessedResultDraw.push(this.Winner[0].innerHTML)
-
     }
+    
     compareResults() {
         this.pointCounter = 0
         for (let l = 0; l < 15; l++) {
@@ -154,13 +146,9 @@ class FantasyTennis {
                 this.Winner[l - 14].style.backgroundColor = "lightgreen";
             }
             this.totalPoints.innerHTML = this.pointCounter
-
-
         }
-
         for (let l = 0; l < 15; l++) {
             if (this.guessedResultDraw[l] != this.realResultDraw[l] && l < 8 && this.guessedResultDraw[l] != "") {
-
             } else if (this.guessedResultDraw[l] != this.realResultDraw[l] && l < 12 && this.guessedResultDraw[l] != "") {
                 this.Semifinal[l - 8].style.backgroundColor = "red";
             } else if (this.guessedResultDraw[l] != this.realResultDraw[l] && l < 14 && this.guessedResultDraw[l] != "") {
@@ -170,7 +158,6 @@ class FantasyTennis {
             }
         }
     }
-
     mainLoop(FT) {
         this.Quarterfinal.forEach((element, index) => {
             element.onclick = () => {
@@ -178,39 +165,26 @@ class FantasyTennis {
                 //this.Semifinal[Math.floor(index / 2)] = element;
                 this.pushResults()
                 this.compareResults()
-
             }
         })
-
         this.Semifinal.forEach((element, index) => {
             element.onclick = () => {
                 this.Final[Math.floor(index / 2)].innerHTML = element.innerHTML;
                 //this.Final[Math.floor(index / 2)] = element;
                 this.pushResults()
                 this.compareResults()
-
             }
         })
-
         this.Final.forEach((element, index) => {
             element.onclick = () => {
                 this.Winner[Math.floor(index / 2)].innerHTML = element.innerHTML;
                 //this.Winner[Math.floor(index / 2)] = element;
                 this.pushResults()
                 this.compareResults()
-
             }
         })
         this.submitButton.onclick = () => {
             SB.populateScoreBoard()
-
         }
     }
-
-
-
-
-
-
-
 }
