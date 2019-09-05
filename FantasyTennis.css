@@ -1,3 +1,29 @@
+table {
+  font-family: Verdana;
+  font-size: 16px;
+  border-collapse: collapse;
+  width: 600px;
+  font-weight: bold;
+}
+
+td, th {
+  padding: 10px;
+  text-align: left;
+  margin: 0;
+}
+
+tbody tr:nth-child(2n){
+  background-color: #eee;
+  font-size: 14px;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  background-color: #333;
+  color: white;
+}
+
 
 #DrawOverall {
     display: flex;
@@ -6,34 +32,13 @@
 
 }
 
-#theDrawR1 {
+#theDrawR1, #theDrawR2, #theDrawR3, #theDrawR4 {
     display: flex;
     width: 100px;
     height: 1200px;
-    flex-direction: column;
-}
-#theDrawR2 {
-    display: flex;
-    width: 100px;
-    height: 1200px;
-    flex-direction: column;
     margin-left: 100px;
-}
-#theDrawR3 {
-    display: flex;
-    width: 100px;
-    height: 1200px;
     flex-direction: column;
-    margin-left: 100px;
 }
-#theDrawR4 {
-    display: flex;
-    width: 100px;
-    height: 1200px;
-    flex-direction: column;
-    margin-left: 100px;
-}
-
 
   .bottomOfTwo {
     display: flex;
@@ -100,3 +105,32 @@
     margin-left: 10px
 
   }
+
+  #Scoreboard {
+    display: flex;
+    flex-direction: column;
+    height:30px;
+    width: 100px;
+    margin-top: 20px;
+    margin-left: 610px
+
+  }
+
+
+h1 {
+  width: 1700px;
+  text-align: center;
+  text-shadow: 4px 4px rgb(168, 156, 156);
+  color: #574291;
+  font-size: 60px;
+  
+
+}
+#chooseTournament {
+  margin-left: 100px;
+  width: 100px;
+  height: 30px;
+  font-size: 16px;
+
+
+}

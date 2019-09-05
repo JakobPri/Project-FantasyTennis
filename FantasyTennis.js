@@ -2,8 +2,8 @@ class FantasyTennis {
     constructor() {
         this.tournamentName = document.getElementById("chooseTournament").value;
         this.drawSize = 0;
-        this.actualPlayer = ["Federer", "Djokovic", "Nadal", "Thiem", "Zverev", "Nishikori", "Cilic", "Dimitrov"];
-        this.realResultDraw = ["Federer", "Djokovic", "Nadal", "Thiem", "Zverev", "Nishikori", "Cilic", "Dimitrov", "Federer", "Thiem", "Zverev", "Cilic", "Federer", "Cilic", "Federer"] // Quarter, Semi, Final, Winner
+        this.actualPlayer = ["Federer", "Djokovic", "Nadal", "Thiem", "Zverev", "Nishikori", "Cilic", "Dimitrov"]; //ATP?
+        this.realResultDraw = ["Federer", "Djokovic", "Nadal", "Thiem", "Zverev", "Nishikori", "Cilic", "Dimitrov", "Federer", "Thiem", "Zverev", "Cilic", "Federer", "Cilic", "Federer"] // Quarter, Semi, Final, Winner , ATP?
         this.guessedResultDraw = [];
         this.topBox = document.getElementsByClassName("topOfTwo");
         this.bottomBox = document.getElementsByClassName("bottomOfTwo");
@@ -18,15 +18,11 @@ class FantasyTennis {
         this.Winner = [];
         this.pointCounter = 0;
         this.totalPoints = document.getElementById("totalPoint");
+        this.submitButton = document.getElementById("submitButton");
     }
 
 
-    start() {
-        this.setUpTournament()
-        this.setUpGraphicDraw()
-        this.defineStructure()
-        this.clicker()
-    }
+
     setUpTournament() {
 
 
@@ -46,7 +42,18 @@ class FantasyTennis {
         }
     }
 
+
     setUpGraphicDraw() {
+        // setup1R() {}
+        // setup2R() {}
+        // setup3R() {}
+        // setup4R() {}
+        // setupQF() {}
+        // setupSF() {}
+        // setupFF() {}
+
+
+
         for (let i = 1; i <= this.drawSize / 2; i++) {
             let box = document.createElement("div");
             let playerBoxes = document.createElement("button");
@@ -59,6 +66,7 @@ class FantasyTennis {
             box.appendChild(playerBoxes1);
             document.getElementById("theDrawR1").appendChild(box);
         }
+
         for (let j = 1; j <= this.drawSize / 4; j++) {
             let box = document.createElement("div");
             let playerBoxes2 = document.createElement("button");
@@ -93,7 +101,7 @@ class FantasyTennis {
         }
 
     }
-    defineStructure() {
+    defineBackend() {
         this.Quarterfinal.push(this.topBox[0])
         this.Quarterfinal.push(this.bottomBox[0])
         this.Quarterfinal.push(this.topBox[1])
@@ -116,6 +124,7 @@ class FantasyTennis {
     }
 
     pushResults() {
+
         this.guessedResultDraw = []
         for (let i = 0; i < 8; i++) {
             this.guessedResultDraw.push(this.Quarterfinal[i].innerHTML)
@@ -127,57 +136,81 @@ class FantasyTennis {
             this.guessedResultDraw.push(this.Final[k].innerHTML)
         }
         this.guessedResultDraw.push(this.Winner[0].innerHTML)
+
     }
     compareResults() {
         this.pointCounter = 0
         for (let l = 0; l < 15; l++) {
             if (this.guessedResultDraw[l] == this.realResultDraw[l] && l < 8) {
-                this.pointCounter = this.pointCounter + 0
+                this.pointCounter = this.pointCounter + 0;
             } else if (this.guessedResultDraw[l] == this.realResultDraw[l] && l < 12) {
                 this.pointCounter = this.pointCounter + 1
+                this.Semifinal[l - 8].style.backgroundColor = "lightgreen";
             } else if (this.guessedResultDraw[l] == this.realResultDraw[l] && l < 14) {
                 this.pointCounter = this.pointCounter + 2
+                this.Final[l - 12].style.backgroundColor = "lightgreen";
             } else if (this.guessedResultDraw[l] == this.realResultDraw[l] && l < 15) {
                 this.pointCounter = this.pointCounter + 4
+                this.Winner[l - 14].style.backgroundColor = "lightgreen";
             }
             this.totalPoints.innerHTML = this.pointCounter
 
+
         }
-        console.log(this.realResultDraw)
-        console.log(this.guessedResultDraw)
-        console.log(this.pointCounter)
+
+        for (let l = 0; l < 15; l++) {
+            if (this.guessedResultDraw[l] != this.realResultDraw[l] && l < 8 && this.guessedResultDraw[l] != "") {
+
+            } else if (this.guessedResultDraw[l] != this.realResultDraw[l] && l < 12 && this.guessedResultDraw[l] != "") {
+                this.Semifinal[l - 8].style.backgroundColor = "red";
+            } else if (this.guessedResultDraw[l] != this.realResultDraw[l] && l < 14 && this.guessedResultDraw[l] != "") {
+                this.Final[l - 12].style.backgroundColor = "red";
+            } else if (this.guessedResultDraw[l] != this.realResultDraw[l] && l < 15 && this.guessedResultDraw[l] != "") {
+                this.Winner[l - 14].style.backgroundColor = "red";
+            }
+        }
     }
 
-    clicker() {
-    this.Quarterfinal.forEach((element, index) => {
+    mainLoop(FT) {
+        this.Quarterfinal.forEach((element, index) => {
+            element.onclick = () => {
+                this.Semifinal[Math.floor(index / 2)].innerHTML = element.innerHTML;
+                //this.Semifinal[Math.floor(index / 2)] = element;
+                this.pushResults()
+                this.compareResults()
 
-        element.onclick = () => {
-            this.Semifinal[Math.floor(index / 2)].innerHTML = element.innerHTML;
-            this.Semifinal[Math.floor(index / 2)] = element;
-            console.log(this.Semifinal)
-            this.pushResults()
-            this.compareResults()
+            }
+        })
+
+        this.Semifinal.forEach((element, index) => {
+            element.onclick = () => {
+                this.Final[Math.floor(index / 2)].innerHTML = element.innerHTML;
+                //this.Final[Math.floor(index / 2)] = element;
+                this.pushResults()
+                this.compareResults()
+
+            }
+        })
+
+        this.Final.forEach((element, index) => {
+            element.onclick = () => {
+                this.Winner[Math.floor(index / 2)].innerHTML = element.innerHTML;
+                //this.Winner[Math.floor(index / 2)] = element;
+                this.pushResults()
+                this.compareResults()
+
+            }
+        })
+        this.submitButton.onclick = () => {
+            SB.populateScoreBoard()
+
         }
-    })
-    
-    this.Semifinal.forEach((element, index) => {
-    
-        element.onclick = () => {
-            this.Final[Math.floor(index / 2)].innerHTML = element.innerHTML;
-            console.log(Math.floor(index / 2))
-            this.pushResults()
-            this.compareResults()
-        }
-    })
-    
-    this.Final.forEach((element, index) => {
-    
-        element.onclick = () => {
-            this.Winner[Math.floor(index / 2)].innerHTML = element.innerHTML;
-            console.log(Math.floor(index / 2))
-            this.pushResults()
-            this.compareResults()
-        }
-    })
-}
+    }
+
+
+
+
+
+
+
 }
