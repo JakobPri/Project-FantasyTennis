@@ -29,7 +29,7 @@ button:hover {
   color: #fff;
   transform: translateY(-7px);
 }
-}
+
 
 table {
   font-family: Verdana;
@@ -114,7 +114,9 @@ th {
     display: flex;
     flex-direction: column;
     margin-top: 300px;
-    margin-left: 10px
+    margin-left: 10px;
+    justify-content: center;
+    align-items: center;
 
   }
   
