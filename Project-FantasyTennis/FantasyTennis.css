@@ -1,0 +1,75 @@
+button {
+  width: 140px;
+  height: 25px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  text-align: center;
+  vertical-align: middle;
+  }
+
+button:hover {
+  background-color: #2EE59D;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+
+#DrawOverall {
+    display: flex;
+    flex-direction: row
+
+
+}
+
+#theDrawR1, #theDrawR2, #theDrawR3, #theDrawR4, #theDrawR5, #theDrawR6, #theDrawR7, #theDrawR8, #theDrawR9 {
+    display: flex;
+    width: 100px;
+    height: 1200px;
+    margin-left: 100px;
+    flex-direction: column;
+    
+}
+#submitButton {
+  height: 25px;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 100px
+}
+
+  #Scoreboard {
+    display: flex;
+    flex-direction: column;
+    height:30px;
+    width: 100px;
+    margin-top: 20px;
+    margin-left: 610px
+
+  }
+
+
+h1 {
+  width: 1700px;
+  text-align: center;
+  text-shadow: 4px 4px rgb(168, 156, 156);
+  color: #574291;
+  font-size: 60px;
+  
+
+}
+#chooseTournament {
+  margin-left: 100px;
+  width: 100px;
+  height: 30px;
+  font-size: 16px;
+}
