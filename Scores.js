@@ -5,10 +5,10 @@ class ScoreBoard {
             [],
             []
         ]; // [{name: "Marco", score: 0}, {name: "Jacob", score: 0}, {name: "Patrick", score: 0}]
-    }
+    } // This function adds the Players Name and Points to the Scoreboard.
     populateScoreBoard() {
         this.playerName = prompt("Please enter your name", "TennisGott");
-        if (this.game.guessedResultDraw.length === 15) {
+        if (this.game.guessedResultDraw.length === (FT.drawSize*2)-1) {
             this.players[0].push(this.playerName);
             this.players[1].push(this.game.pointCounter);
             for (let i = 0; i < this.players[0].length; i++) {
