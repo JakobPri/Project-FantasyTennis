@@ -27,7 +27,12 @@ button:hover {
 
 #DrawOverall {
     display: flex;
-    flex-direction: row
+    flex-direction: row;
+    vertical-align: top;
+    align-items: flex-start;
+    justify-content: space-around;
+    margin: 5rem;
+
 
 
 }
@@ -53,7 +58,7 @@ button:hover {
     height:30px;
     width: 100px;
     margin-top: 20px;
-    margin-left: 610px
+    margin-left: 400px
 
   }
 

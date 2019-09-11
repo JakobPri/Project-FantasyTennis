@@ -12,10 +12,6 @@ class FantasyTennis {
         this.theDraw7 = document.getElementsByClassName("theDrawR7")
         this.theDraw8 = document.getElementsByClassName("theDrawR8")
         this.tournamentOptionButton = document.getElementById("chooseTournament")
-        this.Quarterfinal = [];
-        this.Semifinal = [];
-        this.Final = [];
-        this.Winner = [];
         this.pointCounter = 0;
         this.totalPoints = document.getElementById("totalPoint");
         this.submitButton = document.getElementById("submitButton");
@@ -45,6 +41,15 @@ class FantasyTennis {
         for (let i = 0; i < this.drawSize; i++) {
             this.theDraw1[i].innerHTML = randomPlayers[i]
         }
+        console.log(this.theDraw1)
+        console.log(this.theDraw2)
+        console.log(this.theDraw3)
+        console.log(this.theDraw4)
+        console.log(this.theDraw5)
+        console.log(this.theDraw6)
+        console.log(this.theDraw7)
+        console.log(this.theDraw8)
+
     }
 
     /*pushResults() {
@@ -102,6 +107,15 @@ class FantasyTennis {
             this.setupGraphic2(this.drawSize)
             this.randomizeStartingPlayers();
         }
+        this.theDraw1.forEach((element, index) => {
+            element.onclick = () => {
+                this.theDraw2[Math.floor(index / 2)].innerHTML = element.innerHTML;
+            }
+        })
+
+
+
+
     }
     // This function adds the appropriate size to the draw and makes it visible
     setupGraphic2(drawSize) {
@@ -128,4 +142,5 @@ class FantasyTennis {
 
 
     }
+    
 }
