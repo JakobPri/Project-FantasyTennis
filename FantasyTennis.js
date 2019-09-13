@@ -3,20 +3,13 @@ class FantasyTennis {
         this.tournamentName = document.getElementById("chooseTournament").value;
         this.drawSize = 0;
         this.guessedResultDraw = [];
-        this.theDraw1 = document.getElementsByClassName("theDrawR1")
-        this.theDraw2 = document.getElementsByClassName("theDrawR2")
-        this.theDraw3 = document.getElementsByClassName("theDrawR3")
-        this.theDraw4 = document.getElementsByClassName("theDrawR4")
-        this.theDraw5 = document.getElementsByClassName("theDrawR5")
-        this.theDraw6 = document.getElementsByClassName("theDrawR6")
-        this.theDraw7 = document.getElementsByClassName("theDrawR7")
-        this.theDraw8 = document.getElementsByClassName("theDrawR8")
         this.tournamentOptionButton = document.getElementById("chooseTournament")
         this.pointCounter = 0;
         this.totalPoints = document.getElementById("totalPoint");
         this.submitButton = document.getElementById("submitButton");
+        this.drawOverall = document.getElementById("DrawOverall")
     }
-// This function adds for every available tournament one option to the Tournament Choosing Tab
+    // This function adds for every available tournament one option to the Tournament Choosing Tab
     setUpTournament() {
         this.tournamentName = document.getElementById("chooseTournament").value;
         tournament.forEach((item) => {
@@ -24,7 +17,8 @@ class FantasyTennis {
             tournamentOption.innerText = item[1];
             document.getElementById("chooseTournament").appendChild(tournamentOption);
         })
-// This function returns the drawSize of the chosen Tournament
+        this.randomizeStartingPlayers()
+        // This function returns the drawSize of the chosen Tournament
     }
     choosingTournament() {
         this.tournamentName = document.getElementById("chooseTournament").value;
@@ -34,21 +28,16 @@ class FantasyTennis {
                 break;
             }
         }
-    } 
-  // This function adds random Players to the Draw  
+    }
+    // This function adds random Players to the Draw  
     randomizeStartingPlayers() {
         randomPlayers.sort((a, b) => Math.random() - 0.5);
-        for (let i = 0; i < this.drawSize; i++) {
-            this.theDraw1[i].innerHTML = randomPlayers[i]
+        let firstDraw = document.querySelectorAll(".draw-0")
+        for (let index = 0; index < this.drawSize / 2; index++) {
+            firstDraw[index].childNodes[0].innerText = randomPlayers[2 * index + 0]
+            firstDraw[index].childNodes[1].innerText = randomPlayers[2 * index + 1]
         }
-        console.log(this.theDraw1)
-        console.log(this.theDraw2)
-        console.log(this.theDraw3)
-        console.log(this.theDraw4)
-        console.log(this.theDraw5)
-        console.log(this.theDraw6)
-        console.log(this.theDraw7)
-        console.log(this.theDraw8)
+
 
     }
 
@@ -98,7 +87,19 @@ class FantasyTennis {
 
     // This function defines the clicking
 
-    mainLoop() {
+    clickEventHandlerSetup() {
+
+        this.drawOverall.onclick = () => {
+            let clickButtonIndex = parseInt(event.target.id.split("theDrawR")[1])
+
+            /* this.theDraw + (i + 1)[Math.floor(j / 2)].innerHTML = this.theDraw + i[j].innerHTML*/
+        }
+
+
+
+
+
+
         this.submitButton.onclick = () => {
             SB.populateScoreBoard()
         }
@@ -107,11 +108,7 @@ class FantasyTennis {
             this.setupGraphic2(this.drawSize)
             this.randomizeStartingPlayers();
         }
-        this.theDraw1.forEach((element, index) => {
-            element.onclick = () => {
-                this.theDraw2[Math.floor(index / 2)].innerHTML = element.innerHTML;
-            }
-        })
+
 
 
 
@@ -120,27 +117,31 @@ class FantasyTennis {
     // This function adds the appropriate size to the draw and makes it visible
     setupGraphic2(drawSize) {
         for (let i = 1; i <= Math.log2(drawSize); i++) {
-            console.log(FT.theDraw4)
+            let drawDiv = document.createElement("div")
+            drawDiv.id = "draw-" + i
             for (let j = 1; j <= Math.ceil(drawSize / (2 ** i)); j++) {
-                let box = document.createElement("div");
-                box.className = "divAroundButtons"
-                let playerBox1 = document.createElement("button");
-                playerBox1.className = "theDrawR" + i
-                let playerBox2 = document.createElement("button");
-                playerBox2.className = "theDrawR" + i
-                box.appendChild(playerBox1);
-                box.appendChild(playerBox2);
-                document.getElementById("theDrawR" + i).appendChild(box);
+                let gameBoxDiv = document.createElement("div");
+                gameBoxDiv.id = "gameNr" + j
+                gameBoxDiv.className = "game"
+                let player1BoxDiv = document.createElement("button");
+                player1BoxDiv.id = "player1"
+                let player2BoxDiv = document.createElement("button");
+                player2BoxDiv.id = "player2"
+                gameBoxDiv.appendChild(player1BoxDiv);
+                gameBoxDiv.appendChild(player2BoxDiv);
+                drawDiv.appendChild(gameBoxDiv);
             }
         }
-        let box = document.createElement("div");
-        box.className = "divAroundButtons"
-        let playerBox1 = document.createElement("button");
-        playerBox1.className = "theDrawR" + Math.log2(drawSize * 2)
-        box.appendChild(playerBox1);
-        document.getElementById("theDrawR" + Math.log2(drawSize * 2)).appendChild(box);
+        let winnerBoxDiv = document.createElement("div");
+        winnerBoxDiv.id = "winner"
+        winnerBoxDiv.innerText = "Winner!"
+
+        /*let winnerBoxButton = document.createElement("button");
+        playerBox1.className = "theDrawR" + Math.log2(drawSize * 2) + "-1"
+        winnerBoxDiv.appendChild(winnerBoxButton);
+        document.getElementById("theDrawR" + Math.log2(drawSize * 2)).appendChild(box);*/
 
 
     }
-    
+
 }
