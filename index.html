@@ -13,7 +13,7 @@
     <select id="chooseTournament">
       <option></option>
     </select>
-<div id=DrawOverall>
+<div id=DrawOverall> <!--- Please make the divs as siblings so you can use flexbox -->
 <div class="Draw-0">Draw-0</div>
 
     <button id="submitButton">Submit</button>
@@ -36,3 +36,21 @@
 
   </body>
 </html>
+
+<!-- 
+Put a container <div> parent to allow flexbox of the children
+
+<div id=DrawOverall> Inside here go all games </div>
+
+<button id="submitButton">Submit</button>
+
+<div>
+    <table id=Scoreboard>
+        <tr>
+            <th>Name</th>
+            <th>Points</th> 
+          </tr>
+    </table>
+</div>
+
+-->
