@@ -119,6 +119,20 @@ class FantasyTennis {
         }
 
     }
+    
+    /*
+    Maybe it's just easier if you create a string with the html inside like this inside a for loop
+    const playerHTML =
+    `<div id= "draw-${i}" class= "game" >
+    
+        <div class= "player" id= "player-1" >
+    
+    </div>
+    `
+    this.drawOverall.innerHTML = playerHTML 
+    */
+    
+
     // This function adds the appropriate size to the draw and makes it visible
     setupGraphic2(drawSize) {
         for (let i = 1; i <= Math.log2(drawSize); i++) {
