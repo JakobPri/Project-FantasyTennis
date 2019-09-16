@@ -2,189 +2,114 @@ class FantasyTennis {
     constructor() {
         this.tournamentName = document.getElementById("chooseTournament").value;
         this.drawSize = 0;
-        this.actualPlayer = ["Federer", "Djokovic", "Nadal", "Thiem", "Zverev", "Nishikori", "Cilic", "Dimitrov"]; //ATP?
-        this.realResultDraw = ["Federer", "Djokovic", "Nadal", "Thiem", "Zverev", "Nishikori", "Cilic", "Dimitrov", "Federer", "Thiem", "Zverev", "Cilic", "Federer", "Cilic", "Federer"] // Quarter, Semi, Final, Winner , ATP?
         this.guessedResultDraw = [];
-        this.topBox = document.getElementsByClassName("topOfTwo");
-        this.bottomBox = document.getElementsByClassName("bottomOfTwo");
-        this.topBox2 = document.getElementsByClassName("topOfTwo2");
-        this.bottomBox2 = document.getElementsByClassName("bottomOfTwo2");
-        this.topBox3 = document.getElementsByClassName("topOfTwo3");
-        this.bottomBox3 = document.getElementsByClassName("bottomOfTwo3");
-        this.theDrawR4 = document.getElementsByClassName("theDrawR4");
-        this.Quarterfinal = [];
-        this.Semifinal = [];
-        this.Final = [];
-        this.Winner = [];
+        this.tournamentOptionButton = document.getElementById("chooseTournament")
         this.pointCounter = 0;
         this.totalPoints = document.getElementById("totalPoint");
         this.submitButton = document.getElementById("submitButton");
+        this.drawOverall = document.getElementById("DrawOverall")
     }
-
+    // This function adds for every available tournament one option to the Tournament Choosing Tab
     setUpTournament() {
+        this.tournamentName = document.getElementById("chooseTournament").value;
         tournament.forEach((item) => {
-            var tournamentOption = document.createElement("option");
+            let tournamentOption = document.createElement("option");
             tournamentOption.innerText = item[1];
             document.getElementById("chooseTournament").appendChild(tournamentOption);
-
         })
+        //this.randomizeStartingPlayers()
+        // This function returns the drawSize of the chosen Tournament
+    }
+    choosingTournament() {
+        this.tournamentName = document.getElementById("chooseTournament").value;
         for (let city of tournament) {
             if (city[1] == this.tournamentName) {
                 this.drawSize = city[3]
                 break;
             }
-
         }
     }
-
-    setUpGraphicDraw() {
-        // setup1R() {}
-        // setup2R() {}
-        // setup3R() {}
-        // setup4R() {}
-        // setupQF() {}
-        // setupSF() {}
-        // setupFF() {}
-        for (let i = 1; i <= this.drawSize / 2; i++) {
-            let box = document.createElement("div");
-            box.className = "divAroundButtons"
-            let playerBoxes = document.createElement("button");
-            playerBoxes.innerHTML = this.actualPlayer[2 * i - 2];
-            playerBoxes.className = "topOfTwo"
-            let playerBoxes1 = document.createElement("button");
-            playerBoxes1.innerHTML = this.actualPlayer[2 * i - 1];
-            playerBoxes1.className = "bottomOfTwo"
-            box.appendChild(playerBoxes);
-            box.appendChild(playerBoxes1);
-            document.getElementById("theDrawR1").appendChild(box);
+    // This function adds random Players to the Draw  
+    randomizeStartingPlayers() {
+        randomPlayers.sort((a, b) => Math.random() - 0.5);
+        let firstDraw = document.querySelectorAll("#player1")
+        for (let index = 0; index < this.drawSize / 2; index++) {
+            firstDraw[index].innerText = randomPlayers[index * 2]
+        }
+        let firstDraw2 = document.querySelectorAll("#player2")
+        for (let index2 = 0; index2 < this.drawSize / 2; index2++) {
+            firstDraw2[index2].innerText = randomPlayers[index2 * 2 + 1]
         }
 
-        for (let j = 1; j <= this.drawSize / 4; j++) {
-            let box = document.createElement("div");
-            box.className = "divAroundButtons"
-            let playerBoxes2 = document.createElement("button");
-            playerBoxes2.innerHTML = ""
-            playerBoxes2.className = "topOfTwo2"
-            let playerBoxes3 = document.createElement("button");
-            playerBoxes3.innerHTML = "";
-            playerBoxes3.className = "bottomOfTwo2"
-            box.appendChild(playerBoxes2);
-            box.appendChild(playerBoxes3);
-            document.getElementById("theDrawR2").appendChild(box);
-        }
-        for (let k = 1; k <= this.drawSize / 8; k++) {
-            let box = document.createElement("div");
-            box.className = "divAroundButtons"
-            let playerBoxes4 = document.createElement("button");
-            playerBoxes4.innerHTML = ""
-            playerBoxes4.className = "topOfTwo3"
-            let playerBoxes5 = document.createElement("button");
-            playerBoxes5.innerHTML = "";
-            playerBoxes5.className = "bottomOfTwo3"
-            box.appendChild(playerBoxes4);
-            box.appendChild(playerBoxes5);
-            document.getElementById("theDrawR3").appendChild(box);
-        }
-        for (let l = 1; l < 2; l++) {
-            let box = document.createElement("div");
-            let playerBoxes6 = document.createElement("button");
-            playerBoxes6.innerHTML = ""
-            playerBoxes6.className = "theDrawR4"
-            box.appendChild(playerBoxes6);
-            document.getElementById("theDrawR4").appendChild(box);
-        }
-    }
-    
-    defineBackend() {
-        this.Quarterfinal.push(this.topBox[0])
-        this.Quarterfinal.push(this.bottomBox[0])
-        this.Quarterfinal.push(this.topBox[1])
-        this.Quarterfinal.push(this.bottomBox[1])
-        this.Quarterfinal.push(this.topBox[2])
-        this.Quarterfinal.push(this.bottomBox[2])
-        this.Quarterfinal.push(this.topBox[3])
-        this.Quarterfinal.push(this.bottomBox[3])
-
-        this.Semifinal.push(this.topBox2[0])
-        this.Semifinal.push(this.bottomBox2[0])
-        this.Semifinal.push(this.topBox2[1])
-        this.Semifinal.push(this.bottomBox2[1])
-
-        this.Final.push(this.topBox3[0])
-        this.Final.push(this.bottomBox3[0])
-
-        this.Winner.push(this.theDrawR4[0])
     }
 
-    pushResults() {
-        this.guessedResultDraw = []
-        for (let i = 0; i < 8; i++) {
-            this.guessedResultDraw.push(this.Quarterfinal[i].innerHTML)
-        }
-        for (let j = 0; j < 4; j++) {
-            this.guessedResultDraw.push(this.Semifinal[j].innerHTML)
-        }
-        for (let k = 0; k < 2; k++) {
-            this.guessedResultDraw.push(this.Final[k].innerHTML)
-        }
-        this.guessedResultDraw.push(this.Winner[0].innerHTML)
-    }
-    
-    compareResults() {
-        this.pointCounter = 0
-        for (let l = 0; l < 15; l++) {
-            if (this.guessedResultDraw[l] == this.realResultDraw[l] && l < 8) {
-                this.pointCounter = this.pointCounter + 0;
-            } else if (this.guessedResultDraw[l] == this.realResultDraw[l] && l < 12) {
+    // This function defines the clicking
+
+    clickEventHandlerSetup() {
+        let playerButtons = Array.from(document.querySelectorAll(".playerButton"))
+        for (let button of playerButtons) {
+            button.onclick = () => {
                 this.pointCounter = this.pointCounter + 1
-                this.Semifinal[l - 8].style.backgroundColor = "lightgreen";
-            } else if (this.guessedResultDraw[l] == this.realResultDraw[l] && l < 14) {
-                this.pointCounter = this.pointCounter + 2
-                this.Final[l - 12].style.backgroundColor = "lightgreen";
-            } else if (this.guessedResultDraw[l] == this.realResultDraw[l] && l < 15) {
-                this.pointCounter = this.pointCounter + 4
-                this.Winner[l - 14].style.backgroundColor = "lightgreen";
-            }
-            this.totalPoints.innerHTML = this.pointCounter
-        }
-        for (let l = 0; l < 15; l++) {
-            if (this.guessedResultDraw[l] != this.realResultDraw[l] && l < 8 && this.guessedResultDraw[l] != "") {
-            } else if (this.guessedResultDraw[l] != this.realResultDraw[l] && l < 12 && this.guessedResultDraw[l] != "") {
-                this.Semifinal[l - 8].style.backgroundColor = "red";
-            } else if (this.guessedResultDraw[l] != this.realResultDraw[l] && l < 14 && this.guessedResultDraw[l] != "") {
-                this.Final[l - 12].style.backgroundColor = "red";
-            } else if (this.guessedResultDraw[l] != this.realResultDraw[l] && l < 15 && this.guessedResultDraw[l] != "") {
-                this.Winner[l - 14].style.backgroundColor = "red";
+                let gameOfButtonId = event.target.parentNode.id
+                let drawOfButtonId = event.target.parentNode.parentNode.id
+
+                let nextDrawId = "draw-" + (parseInt(drawOfButtonId.split("draw-")[1]) + 1)
+                let nextButtonId = (parseInt(gameOfButtonId.split("gameNr")[1]) & 1) ? "player1" : "player2"
+                let nextGameId = "gameNr" + (Math.ceil(gameOfButtonId.split("gameNr")[1] / 2))
+                document.querySelector("#" + nextDrawId + ">" + "#" + nextGameId + ">" + "#" + nextButtonId).innerText = event.target.innerText
+
+                if (this.pointCounter % 3 == 0) {
+                    document.querySelector("#" + nextDrawId + ">" + "#" + nextGameId + ">" + "#" + nextButtonId).style.background = "red";
+                } else {document.querySelector("#" + nextDrawId + ">" + "#" + nextGameId + ">" + "#" + nextButtonId).style.background = "green";
+            totalPoints = totalPoints + Math.random() * 8}
+
             }
         }
-    }
-    mainLoop(FT) {
-        this.Quarterfinal.forEach((element, index) => {
-            element.onclick = () => {
-                this.Semifinal[Math.floor(index / 2)].innerHTML = element.innerHTML;
-                //this.Semifinal[Math.floor(index / 2)] = element;
-                this.pushResults()
-                this.compareResults()
-            }
-        })
-        this.Semifinal.forEach((element, index) => {
-            element.onclick = () => {
-                this.Final[Math.floor(index / 2)].innerHTML = element.innerHTML;
-                //this.Final[Math.floor(index / 2)] = element;
-                this.pushResults()
-                this.compareResults()
-            }
-        })
-        this.Final.forEach((element, index) => {
-            element.onclick = () => {
-                this.Winner[Math.floor(index / 2)].innerHTML = element.innerHTML;
-                //this.Winner[Math.floor(index / 2)] = element;
-                this.pushResults()
-                this.compareResults()
-            }
-        })
+
         this.submitButton.onclick = () => {
             SB.populateScoreBoard()
+
+
         }
+        this.tournamentOptionButton.onchange = () => {
+            this.choosingTournament();
+            this.setupGraphic2(this.drawSize)
+            this.randomizeStartingPlayers();
+            this.clickEventHandlerSetup()
+        }
+
     }
+
+    // This function adds the appropriate size to the draw and makes it visible
+    setupGraphic2(drawSize) {
+        for (let i = 1; i <= Math.log2(drawSize); i++) {
+            let drawDiv = document.createElement("div")
+            drawDiv.id = "draw-" + i
+            for (let j = 1; j <= Math.ceil(drawSize / (2 ** i)); j++) {
+                let gameBoxDiv = document.createElement("div");
+                gameBoxDiv.id = "gameNr" + j
+                gameBoxDiv.className = "game"
+                let player1BoxDiv = document.createElement("button");
+                player1BoxDiv.id = "player1"
+                player1BoxDiv.className = "playerButton"
+                let player2BoxDiv = document.createElement("button");
+                player2BoxDiv.id = "player2"
+                player2BoxDiv.className = "playerButton"
+                gameBoxDiv.appendChild(player1BoxDiv);
+                gameBoxDiv.appendChild(player2BoxDiv);
+                drawDiv.appendChild(gameBoxDiv);
+                this.drawOverall.appendChild(drawDiv)
+            }
+        }
+        let winnerBoxDiv = document.createElement("div");
+        winnerBoxDiv.id = "winner"
+
+        let winnerBoxButton = document.createElement("button");
+        winnerBoxButton.id = "winnerButton"
+        winnerBoxDiv.appendChild(winnerBoxButton);
+        this.drawOverall.appendChild(winnerBoxDiv)
+
+
+    }
+
 }
