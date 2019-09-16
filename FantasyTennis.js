@@ -17,7 +17,7 @@ class FantasyTennis {
             tournamentOption.innerText = item[1];
             document.getElementById("chooseTournament").appendChild(tournamentOption);
         })
-        this.randomizeStartingPlayers()
+        //this.randomizeStartingPlayers()
         // This function returns the drawSize of the chosen Tournament
     }
     choosingTournament() {
@@ -32,12 +32,14 @@ class FantasyTennis {
     // This function adds random Players to the Draw  
     randomizeStartingPlayers() {
         randomPlayers.sort((a, b) => Math.random() - 0.5);
-        let firstDraw = document.querySelectorAll(".draw-0")
+        let firstDraw = document.querySelectorAll("#player1")
         for (let index = 0; index < this.drawSize / 2; index++) {
-            firstDraw[index].childNodes[0].innerText = randomPlayers[2 * index + 0]
-            firstDraw[index].childNodes[1].innerText = randomPlayers[2 * index + 1]
+            firstDraw[index].innerText = randomPlayers[index*2]
         }
-
+        let firstDraw2 = document.querySelectorAll("#player2")
+        for (let index2 = 0; index2 < this.drawSize / 2; index2++) {
+            firstDraw2[index2].innerText = randomPlayers[index2*2+1]
+        }
 
     }
 
@@ -80,6 +82,10 @@ class FantasyTennis {
                 this.Final[l - 12].style.backgroundColor = "red";
             } else if (this.guessedResultDraw[l] != this.realResultDraw[l] && l < 15 && this.guessedResultDraw[l] != "") {
                 this.Winner[l - 14].style.backgroundColor = "red";
+
+                drawOfButton
+                gameOfButton
+                buttonClicked
             }
         }
     }*/
@@ -88,17 +94,18 @@ class FantasyTennis {
     // This function defines the clicking
 
     clickEventHandlerSetup() {
-
-        this.drawOverall.onclick = () => {
-            let clickButtonIndex = parseInt(event.target.id.split("theDrawR")[1])
-
-            /* this.theDraw + (i + 1)[Math.floor(j / 2)].innerHTML = this.theDraw + i[j].innerHTML*/
+        let playerButtons = Array.from(document.querySelectorAll(".playerButton"))
+        for (let button of playerButtons) {
+            button.onclick = () => {
+                let gameOfButtonId = event.target.parentNode.id
+                let drawOfButtonId = event.target.parentNode.parentNode.id
+                
+                let nextDrawId = "draw-" + (parseInt(drawOfButtonId.split("draw-")[1])+1)
+                let nextButtonId = (parseInt(gameOfButtonId.split("gameNr")[1]) & 1) ? "player1" : "player2"
+                let nextGameId = "gameNr" + (Math.ceil(gameOfButtonId.split("gameNr")[1]/2))
+                document.querySelector("#" + nextDrawId + ">" + "#" + nextGameId + ">" +  "#" + nextButtonId).innerText = event.target.innerText
+            }
         }
-
-
-
-
-
 
         this.submitButton.onclick = () => {
             SB.populateScoreBoard()
@@ -107,11 +114,9 @@ class FantasyTennis {
             this.choosingTournament();
             this.setupGraphic2(this.drawSize)
             this.randomizeStartingPlayers();
+            this.clickEventHandlerSetup()
+
         }
-
-
-
-
 
     }
     // This function adds the appropriate size to the draw and makes it visible
@@ -125,21 +130,23 @@ class FantasyTennis {
                 gameBoxDiv.className = "game"
                 let player1BoxDiv = document.createElement("button");
                 player1BoxDiv.id = "player1"
+                player1BoxDiv.className = "playerButton"
                 let player2BoxDiv = document.createElement("button");
                 player2BoxDiv.id = "player2"
+                player2BoxDiv.className = "playerButton"
                 gameBoxDiv.appendChild(player1BoxDiv);
                 gameBoxDiv.appendChild(player2BoxDiv);
                 drawDiv.appendChild(gameBoxDiv);
+                this.drawOverall.appendChild(drawDiv)
             }
         }
         let winnerBoxDiv = document.createElement("div");
         winnerBoxDiv.id = "winner"
-        winnerBoxDiv.innerText = "Winner!"
 
-        /*let winnerBoxButton = document.createElement("button");
-        playerBox1.className = "theDrawR" + Math.log2(drawSize * 2) + "-1"
+        let winnerBoxButton = document.createElement("button");
+        winnerBoxButton.id = "winnerButton"
         winnerBoxDiv.appendChild(winnerBoxButton);
-        document.getElementById("theDrawR" + Math.log2(drawSize * 2)).appendChild(box);*/
+        this.drawOverall.appendChild(winnerBoxDiv)
 
 
     }

@@ -1,8 +1,9 @@
 const FT = new FantasyTennis()
 const SB = new ScoreBoard(FT)
 
-FT.clickEventHandlerSetup()
+
 FT.setUpTournament()
+FT.clickEventHandlerSetup()
 /*console.log(FT.theDraw1)
 console.log(FT.theDraw2)
 console.log(FT.theDraw3)
