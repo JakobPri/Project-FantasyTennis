@@ -58,7 +58,7 @@ class FantasyTennis {
                 let nextGameId = "gameNr" + (Math.ceil(gameOfButtonId.split("gameNr")[1] / 2))
                 document.querySelector("#" + nextDrawId + ">" + "#" + nextGameId + ">" + "#" + nextButtonId).innerText = event.target.innerText
 
-                if (this.pointCounter % 3 == 0) {
+                if (Math.random() > 0.5) {
                     document.querySelector("#" + nextDrawId + ">" + "#" + nextGameId + ">" + "#" + nextButtonId).style.background = "red";
                 } else {document.querySelector("#" + nextDrawId + ">" + "#" + nextGameId + ">" + "#" + nextButtonId).style.background = "green";
             totalPoints = totalPoints + Math.random() * 8}
@@ -102,11 +102,15 @@ class FantasyTennis {
             }
         }
         let winnerBoxDiv = document.createElement("div");
-        winnerBoxDiv.id = "winner"
-
-        let winnerBoxButton = document.createElement("button");
-        winnerBoxButton.id = "winnerButton"
-        winnerBoxDiv.appendChild(winnerBoxButton);
+        winnerBoxDiv.id = "draw-"+(Math.log2(drawSize)+1)
+        let winnerBoxdiv3 = document.createElement("div");
+        winnerBoxdiv3.id = "gameNr1"
+        winnerBoxdiv3.className = "game"
+        let winnerBoxButton2 = document.createElement("button");
+        winnerBoxButton2.id = "player1"
+        winnerBoxButton2.className = "playerButton"
+        winnerBoxdiv3.appendChild(winnerBoxButton2)
+        winnerBoxDiv.appendChild(winnerBoxdiv3);
         this.drawOverall.appendChild(winnerBoxDiv)
 
 
