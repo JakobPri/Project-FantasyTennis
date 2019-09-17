@@ -9,7 +9,7 @@ class ScoreBoard {
     populateScoreBoard() {
         this.playerName = prompt("Please enter your name", "TennisGott");
         this.players[0].push(this.playerName);
-        this.players[1].push(this.game.pointCounter);
+        this.players[1].push(Math.ceil(FT.pointCounter));
         for (let i = 0; i < this.players[0].length; i++) {
             let tr = document.createElement("tr")
             let td1 = document.createElement("td")
@@ -20,9 +20,6 @@ class ScoreBoard {
             tr.appendChild(td1);
             tr.appendChild(td2);
             document.getElementById("Scoreboard").appendChild(tr);
-
-
-
 
         }
 
